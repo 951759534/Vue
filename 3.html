@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div id="app">
+        <h1>父组件</h1>
+        <table>
+            <tr>
+                <td>
+                    once 不影响子组件的数据
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" v-model="name"/>
+                </td>
+                <td>
+                    {{name}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    sync
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" v-model="word"/>
+                </td>
+                <td>
+                    {{word}}
+                </td>
+            </tr>
+        </table>
+        <con v-bind:my-name.once="name" v-bind:my-word.sync="word">
+        </con>
+    </div>
+    <template id="con">
+         <h1>子组件</h1>
+        <table>
+            <tr>
+            <tr>
+                <td>
+                    once
+                </td>
+            </tr>
+                <td>
+                    <input type="text" v-model="myName"/>
+                </td>
+                <td>
+                    {{myName}}
+                </td>
+            </tr>
+            <tr>
+            <tr>
+                <td>
+                    sync 改变父组件数据
+                </td>
+            </tr>
+                <td>
+                    <input type="text" v-model="myWord"/>
+                </td>
+                <td>
+                    {{myWord}}
+                </td>
+            </tr>
+        </table>
+    </template>
+
+    <script src="js/vue.js"></script>
+    <script>
+       var vm = new Vue({
+                    el:"#app",
+                    data:{
+                               name:"12",
+                               word:"12"
+
+                       }, components:{
+                              con:{
+                                  template:"#con",
+                                 props:["myName","myWord"]
+                              }
+                          }
+                       }
+
+        )
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+        <div id="app">
+            姓名: <input type="text" v-model="name"/>    年龄: <input type="text" v-model="age"/> <button @click="add">添加</button>
+
+
+            <ul>
+                <li v-for="(index,list) in lists">姓名:{{list.name}}   年龄: {{list.age}}   <button @click="del(index)">删除</button></li>
+            </ul>
+        </div>
+        <script src="js/vue.js"></script>
+
+        <script>
+           new Vue({
+               el:"#app",
+               data:{
+                   name:"",
+                   age:"",
+                   lists:[]
+               },
+               methods:{
+                   add:function(){
+                       var obj={
+                           name:this.name,
+                           age:this.age
+                       };
+                       console.log(obj);
+                       this.lists.push(obj);
+                   },
+                   del:function(index){
+                       this.lists.splice(index,1);    //第三个参数替换
+                   }
+               }
+           })
+        </script>
+</body>
+</html>

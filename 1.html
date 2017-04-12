@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="app">
+    <my-component>
+
+
+    </my-component>
+</div>
+<script src="js/vue.js"></script>
+<script>
+    var child = Vue.extend({
+        template:' <div>戒骄戒躁</div>'
+    });
+    var component = Vue.extend({
+        template:'<div>this is my first vue   <child></child></div>',
+        components:{
+            'child':child
+        }
+    });
+    Vue.component('my-component',component);
+    new Vue({
+        el:"#app",
+        components:{
+            'my-component':component
+        }
+    });
+
+
+</script>
+</body>
+</html>

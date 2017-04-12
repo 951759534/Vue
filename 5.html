@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+
+    <div id="app">
+        <ta :bname="name" v-on:receive="rec"></ta>
+        {{name}}
+    </div>
+    <template id="ta">
+        <div>
+            {{bname}}
+        </div>
+        <button @click="clickMe">子组件</button>
+    </template>
+    <script src="js/vue.js"></script>
+<script>
+
+    new Vue({
+        el:"#app",
+        data:{
+            name:"1233343"
+        },methods:{
+            rec:function(elem){
+                console.log(elem);
+            }
+        },
+        components:{
+            ta:{
+                template:"#ta",
+                props:["bname"],
+                methods:{
+                    clickMe:function(){
+                        this.$emit('receive',"asdad");
+                    }
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>
