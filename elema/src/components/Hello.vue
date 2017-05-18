@@ -7,7 +7,7 @@
       <div class="tab-item"> <router-link to="/seller">商家</router-link></div>
     </div>
     <div class="content">
-      <router-view></router-view>
+      <router-view :seller = "seller"></router-view>
     </div>
     <div class="footer">
       footer
@@ -44,17 +44,17 @@
     @import "../common/css/mixin.styl"
     .tab
       display:flex
-      height 40px
+      height 80px
       width:100%
       border-1px(rgba(7,17,27,.1))
       .tab-item
           flex:1
           text-align:center
-          line-height:40px
+          line-height:80px
           &>a     //.tab-item下的a
             text-decoration:none
             display:block
-            font-size:14px
+            font-size:28px
             color: rgb(77,85,93)
           .active
             color:rgb(240,20,20)
