@@ -45,9 +45,9 @@
             </div>
             <v-title :title= "title[0]"></v-title>
             <ul v-if="seller.supports" class="supports">
-              <li class="support-item" v-for="(item,index) in seller.supports">
-                <span class="icon" :class="classMap[seller.supports[index].type]"></span>
-                <span class="text">{{seller.supports[index].description}}</span>
+              <li class="support-item" v-for="(support,index) in seller.supports">
+                <span class="icon" :class="classMap[support.type]"></span>
+                <span class="text">{{support.description}}</span>
               </li>
             </ul>
             <v-title :title= "title[1]"></v-title>
@@ -79,7 +79,8 @@
       return {
         detailShow:false,
         title:['优惠信息', '商家公告'],
-        supportIndex:0
+        supportIndex:0,
+        classMap : ['decrease ', 'discount', 'special', 'invoice', 'guarantee']
       };
     },
     props: {
@@ -88,7 +89,6 @@
       }
     },
     created(){
-      this.classMap = [' decrease ', 'discount', 'special', 'invoice', 'guarantee'];
       this.listRun();
     },
     methods:{
@@ -166,6 +166,24 @@
           overflow:hidden
           cursor:pointer
           .support-lists
+            .icon
+              display:inline-block
+              width: 24px
+              height: 24px
+              vertical-align:top
+              margin-right: 12px
+              background-size: 24px 24px
+              background-repeat:no-repeat
+              &.decrease
+                bg-image('decrease_1')
+              &.discount
+                bg-image('discount_1')
+              &.guarantee
+                bg-image('guarantee_1')
+              &.invoice
+                bg-image('invoice_1')
+              &.special
+                bg-image('special_1')
             .support-list
               position:absolute
               bottom:0
@@ -186,25 +204,6 @@
               &.list-up-leave-active
                 transform:translateY(-100%)
                 transition all 1s ease-in-out
-              .icon
-                display:inline-block
-                width:24px
-                height:24px
-                margin-right:8px
-                vertical-align:top
-                background-size:24px 24px
-                line-height:24px
-                background-repeat:no-repeat
-                &.decrease
-                  bg-image('decrease_1')
-                &.discount
-                  bg-image('discount_1')
-                &.guarantee
-                  bg-image('guarantee_1')
-                &.invoice
-                  bg-image('invoice_1')
-                &.special
-                  bg-image('special_1')
               .text
                 vertical-align:top
                 line-height:24px
@@ -300,16 +299,17 @@
             margin:0 auto
             .support-item
               padding:0 12px
-              margin-bottom: 12px
+              margin-bottom: 24px
               font-size:0
+              line-height:24px
               &:last-child
                 margin-bottom:0
               .icon
                 display:inline-block
                 width: 32px
                 height: 32px
-                vertical-align:top
                 margin-right: 12px
+                vertical-align:top
                 background-size: 32px 32px
                 background-repeat:no-repeat
                 &.decrease
@@ -323,8 +323,10 @@
                 &.special
                   bg-image('special_2')
               .text
-                line-height: 32px
-                font-size: 24px
+                font-size:1.2rem
+                font-weight:200
+                line-height:32px
+                vertical-align:top
           .bulletin
             width:80%
             margin:0 auto
@@ -333,6 +335,7 @@
               font-size:24px
               color:rgb(255,255,255)
               line-height:48px
+              font-weight:200
       .detail-close
         position:relative
         width:32px

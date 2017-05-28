@@ -66,12 +66,9 @@
             &.half
               bg-image("star48_half")
             &.off
-              bg-image("star48_half")
+              bg-image("star48_off")
             &:last-child
               margin-right:0
-
-
-
         &.star-36
           .star-item
             width: 30px
@@ -83,11 +80,9 @@
             &.half
               bg-image("star36_half")
             &.off
-              bg-image("star36_half")
+              bg-image("star36_off")
             &:last-child
               margin-right:0
-
-
         &.star-24
           .star-item
             width: 24px
@@ -99,7 +94,7 @@
             &.half
               bg-image("star24_half")
             &.off
-              bg-image("star24_half")
+              bg-image("star24_off")
             &:last-child
               margin-right:0
 

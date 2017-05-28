@@ -7,25 +7,30 @@
       <div class="tab-item"> <router-link to="/seller">商家</router-link></div>
     </div>
     <div class="content">
-      <router-view :seller = "seller"></router-view>
+      <router-view :seller = "seller" :goods="goods" :bus = "bus"></router-view>
     </div>
     <div class="footer">
-      footer
+      <shopCart :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"  ref="showCart" :bus="bus"></shopCart>
     </div>
   </div>
 </template>
 
 <script>
-  import header from './header/header.vue';
+  import header from '@/components/header/header.vue';
+  import shopCart from '@/components/shopCart/shopCart.vue'
+  import Vue from 'vue';
    const OK = 0;
   export default {
   name : 'hello',
     components: {
-    'v-header' : header
+    'v-header' : header,
+      shopCart
   },
   data () {
     return {
-      seller:{}
+      seller:{},
+      goods:[],
+      bus:new Vue()
     }
   },
     created(){
@@ -35,7 +40,26 @@
             this.seller = res.data;
           }
     })
-  }
+      this.$http.get('/api/goods').then((res)=>{
+          res = res.body;
+          if(res.errono === OK){
+            this.goods = res.data;
+          }
+      })
+    },
+    computed:{
+      selectFoods(){
+        let foods = [];
+        this.goods.forEach((good)=>{
+          good.foods.forEach((food)=>{
+            if(food.count){
+              foods.push(food)
+            }
+          })
+        })
+        return foods
+      }
+    }
 }
 </script>
 
